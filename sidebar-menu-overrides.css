@@ -1,0 +1,29 @@
+/**
+ * Sidebar nav overrides when markup is generated from the database.
+ * Scope: .nav.nav-pills.flex-column matches your sidebar list.
+ */
+
+/* Section toggles: show briefcase instead of chevron-right (same Font Awesome ::before slot). */
+.nav.nav-pills.flex-column .nav-link.btn-toggle > i.fa-chevron-right::before {
+  content: "\f0b1"; /* Font Awesome 6 Solid: fa-briefcase */
+}
+
+/* Child links: remove the minimize bullet icon while keeping text and layout. */
+.nav.nav-pills.flex-column .btn-toggle-nav a > i.fa-window-minimize {
+  display: none !important;
+}
+
+/* Tickets area: tab-style nav links only inside #divTickets */
+#divTickets a.nav-link {
+  padding: 4px 15px;
+  border: 1px solid #e7e7e7;
+  border-radius: 6px;
+  margin: 0 0 10px 0;
+  display: inline-block;
+  background: #fdfdfd;
+}
+
+#divTickets a.nav-link.active {
+  background: #919191;
+  color: #fff;
+}
