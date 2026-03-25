@@ -12,3 +12,18 @@
 .nav.nav-pills.flex-column .btn-toggle-nav a > i.fa-window-minimize {
   display: none !important;
 }
+
+/* Tickets area: tab-style nav links only inside #divTickets */
+#divTickets a.nav-link {
+  padding: 4px 15px;
+  border: 1px solid #e7e7e7;
+  border-radius: 6px;
+  margin: 0 0 10px 0;
+  display: inline-block;
+  background: #fdfdfd;
+}
+
+#divTickets a.nav-link.active {
+  background: #919191;
+  color: #fff;
+}
