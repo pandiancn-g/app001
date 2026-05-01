@@ -1,0 +1,14 @@
+[
+  {
+    "model": "gpt-5.5-high",
+    "offer": "100%",
+    "date": "2026-05-01",
+    "description": "Full credit offer available today"
+  },
+  {
+    "model": "gpt-5.5-high",
+    "offer": "50%",
+    "date": "2026-05-02",
+    "description": "Half-price offer available tomorrow"
+  }
+]

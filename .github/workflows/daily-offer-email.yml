@@ -1,0 +1,41 @@
+name: Daily Model Offer Email
+
+on:
+  schedule:
+    # Runs every day at 09:00 UTC. Adjust this cron if you need a different send time.
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Optional YYYY-MM-DD date to preview/send for"
+        required: false
+        type: string
+
+jobs:
+  send-offer-email:
+    runs-on: ubuntu-latest
+    env:
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      EMAIL_SUBJECT_PREFIX: ${{ vars.EMAIL_SUBJECT_PREFIX || '[Cursor Offers]' }}
+      SCHEDULER_TIMEZONE: ${{ vars.SCHEDULER_TIMEZONE || 'UTC' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Send daily offer email
+        run: |
+          if [ -n "${{ inputs.date }}" ]; then
+            python3 scripts/send_daily_offer_email.py --date "${{ inputs.date }}"
+          else
+            python3 scripts/send_daily_offer_email.py
+          fi
