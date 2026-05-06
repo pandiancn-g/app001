@@ -1,0 +1,1797 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bayaan Seasonality Pattern Highlighter - Advanced Mock UI</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d9e2ef;
+      --nav: #0b1220;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-soft: #dbeafe;
+      --cyan: #0891b2;
+      --cyan-soft: #cffafe;
+      --green: #16a34a;
+      --green-soft: #dcfce7;
+      --amber: #d97706;
+      --amber-soft: #fef3c7;
+      --red: #dc2626;
+      --red-soft: #fee2e2;
+      --purple: #7c3aed;
+      --purple-soft: #ede9fe;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 292px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      background: var(--nav);
+      color: #e5e7eb;
+      padding: 24px 20px;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      color: white;
+      border-radius: 15px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #2563eb 48%, #7c3aed);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .brand p {
+      margin: 2px 0 0;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    .nav-title {
+      margin: 24px 0 10px;
+      color: #94a3b8;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-item {
+      display: block;
+      padding: 10px 11px;
+      border-radius: 12px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: rgba(148, 163, 184, 0.16);
+      color: white;
+    }
+
+    .sidebar-note {
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 16px;
+      padding: 12px;
+      color: #cbd5e1;
+      font-size: 13px;
+    }
+
+    .content {
+      padding: 28px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+      padding: 30px;
+      border-radius: 28px;
+      color: white;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(125, 211, 252, 0.22), transparent 28%),
+        linear-gradient(135deg, #1e3a8a, #0f766e 55%, #312e81);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #e0f2fe;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero h2 {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.12;
+    }
+
+    .hero p {
+      max-width: 850px;
+      color: #dbeafe;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .button {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 14px;
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .button.ghost {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+    }
+
+    .button.small {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+
+    .hero-panel {
+      display: grid;
+      gap: 12px;
+    }
+
+    .purpose-card {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.3);
+      padding: 18px;
+    }
+
+    .purpose-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .purpose-card strong {
+      color: white;
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-end;
+      margin-bottom: 14px;
+    }
+
+    .section-header h3 {
+      margin: 0;
+      font-size: 23px;
+    }
+
+    .section-header p {
+      margin: 4px 0 0;
+      color: var(--muted);
+    }
+
+    .panel,
+    .metric-card,
+    .mini-card,
+    .module-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .panel h4 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .metrics,
+    .workflow,
+    .module-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-4,
+    .metrics {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .workflow {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    .module-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .metric-card {
+      padding: 18px;
+    }
+
+    .metric-card .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .metric-card .value {
+      font-size: 30px;
+      font-weight: 900;
+      margin: 8px 0 2px;
+    }
+
+    .metric-card .sub {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .positive {
+      color: var(--green);
+    }
+
+    .warning {
+      color: var(--amber);
+    }
+
+    .danger {
+      color: var(--red);
+    }
+
+    .info {
+      color: var(--primary);
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(4, minmax(130px, 1fr));
+      gap: 12px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 11px;
+      background: white;
+      color: var(--ink);
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .badge.green {
+      color: #15803d;
+      background: var(--green-soft);
+    }
+
+    .badge.amber {
+      color: #b45309;
+      background: var(--amber-soft);
+    }
+
+    .badge.red {
+      color: #b91c1c;
+      background: var(--red-soft);
+    }
+
+    .badge.purple {
+      color: #6d28d9;
+      background: var(--purple-soft);
+    }
+
+    .badge.cyan {
+      color: #0e7490;
+      background: var(--cyan-soft);
+    }
+
+    .alert-ticker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      box-shadow: var(--shadow);
+    }
+
+    .alert-ticker strong {
+      color: #9a3412;
+    }
+
+    .chart-wrap {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .legend {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .dot.green {
+      background: var(--green);
+    }
+
+    .dot.amber {
+      background: var(--amber);
+    }
+
+    .dot.red {
+      background: var(--red);
+    }
+
+    .component-row {
+      display: grid;
+      grid-template-columns: 150px 1fr 70px;
+      gap: 12px;
+      align-items: center;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .track {
+      height: 13px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+
+    .bar.seasonal {
+      background: var(--amber);
+    }
+
+    .bar.calendar {
+      background: var(--purple);
+    }
+
+    .bar.trend {
+      background: var(--green);
+    }
+
+    .bar.irregular {
+      background: var(--red);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8px;
+    }
+
+    .month-card {
+      min-height: 84px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: white;
+      padding: 9px;
+      font-size: 12px;
+    }
+
+    .month-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .month-card.ramadan {
+      border-color: #93c5fd;
+      background: #eff6ff;
+    }
+
+    .month-card.eid {
+      border-color: #c4b5fd;
+      background: #f5f3ff;
+    }
+
+    .month-card.heat {
+      border-color: #fcd34d;
+      background: #fffbeb;
+    }
+
+    .month-card.tourism {
+      border-color: #67e8f9;
+      background: #ecfeff;
+    }
+
+    .step-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
+      padding: 14px;
+    }
+
+    .step-card span {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .step-card h4 {
+      margin: 8px 0 6px;
+      font-size: 15px;
+    }
+
+    .module-card {
+      padding: 18px;
+    }
+
+    .module-card h4 {
+      margin: 10px 0 6px;
+    }
+
+    .mini-card {
+      padding: 14px;
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .assistant-box {
+      display: grid;
+      gap: 12px;
+    }
+
+    .ai-response {
+      padding: 16px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .suggested {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .suggested button {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 999px;
+      padding: 7px 10px;
+      cursor: pointer;
+      color: #334155;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .alert-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .alert-card {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: white;
+      padding: 14px;
+    }
+
+    .alert-card.high {
+      border-color: #fecaca;
+      background: #fff7f7;
+    }
+
+    .alert-card.medium {
+      border-color: #fed7aa;
+      background: #fffbeb;
+    }
+
+    .alert-card.advisory {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .arch-box {
+      min-height: 120px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
+      padding: 14px;
+    }
+
+    .arch-box strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      padding: 28px 0 10px;
+    }
+
+    @media (max-width: 1180px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+
+      .hero,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .metrics,
+      .toolbar,
+      .workflow,
+      .module-grid,
+      .architecture,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">B</div>
+        <div>
+          <h1>Bayaan</h1>
+          <p>Advanced mock UI</p>
+        </div>
+      </div>
+
+      <div class="nav-title">Seasonality highlighter</div>
+      <a class="nav-item active" href="#overview">Overview</a>
+      <a class="nav-item" href="#command">Command Center</a>
+      <a class="nav-item" href="#analyzer">Indicator Analyzer</a>
+      <a class="nav-item" href="#calendar">Calendar Intelligence</a>
+      <a class="nav-item" href="#alerts">Real-Time Alerts</a>
+      <a class="nav-item" href="#assistant">AI Research Assistant</a>
+      <a class="nav-item" href="#models">Models and Diagnostics</a>
+      <a class="nav-item" href="#data">Data Collections</a>
+      <a class="nav-item" href="#architecture">Architecture</a>
+      <a class="nav-item" href="#governance">Governance</a>
+
+      <div class="nav-title">Core question</div>
+      <div class="sidebar-note">
+        Is the movement in an economic indicator a real signal, or is it normal
+        seasonality from Ramadan, Eid, summer heat, tourism season, or working days?
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="hero" id="overview">
+        <div>
+          <span class="eyebrow">New AI use case mockup</span>
+          <h2>Bayaan Seasonality Pattern Highlighter</h2>
+          <p>
+            A research-grade AI tool that detects, adjusts, explains, and monitors
+            seasonal patterns in Abu Dhabi economic indicators. It prevents wrong
+            conclusions by separating normal calendar effects from real economic
+            momentum.
+          </p>
+          <div class="hero-actions">
+            <button class="button" onclick="scrollToSection('analyzer')">Analyze an indicator</button>
+            <button class="button ghost" onclick="simulateAlert()">Simulate live alert</button>
+            <button class="button secondary" onclick="scrollToSection('data')">View data design</button>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="purpose-card">
+            <h3>Simple purpose</h3>
+            <p>
+              If construction output falls <strong>22%</strong> in Q3, the tool
+              explains whether this is a normal summer heat slowdown or a genuine
+              sector weakness.
+            </p>
+          </div>
+          <div class="purpose-card">
+            <h3>Advanced purpose</h3>
+            <p>
+              It produces raw, seasonally adjusted, trend-cycle, seasonal,
+              calendar, and irregular components with AI explanation, diagnostics,
+              alerts, audit trails, and bilingual reporting.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="command">
+        <div class="section-header">
+          <div>
+            <h3>1. Real-time command center</h3>
+            <p>Executive view of seasonal adjustment coverage, model health, and alerts.</p>
+          </div>
+          <button class="button small" onclick="refreshMock()">Refresh mock feed</button>
+        </div>
+
+        <div class="alert-ticker" id="alertTicker">
+          <div>
+            <strong>Live alert:</strong>
+            <span id="tickerText">Retail sales January movement is mostly post-Ramadan seasonality; adjusted sales are positive.</span>
+          </div>
+          <span class="badge amber">Advisory</span>
+        </div>
+
+        <div class="metrics section">
+          <div class="metric-card">
+            <div class="label">Indicators monitored</div>
+            <div class="value">214</div>
+            <div class="sub">GDP, CPI, labour, trade, tourism, retail</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Seasonally adjusted series</div>
+            <div class="value positive">187</div>
+            <div class="sub">87% coverage of eligible indicators</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Open alerts</div>
+            <div class="value warning" id="openAlerts">9</div>
+            <div class="sub">3 high, 4 medium, 2 advisory</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Diagnostics pass rate</div>
+            <div class="value info">96%</div>
+            <div class="sub">Residual seasonality tests passed</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <h3>2. What the tool does end to end</h3>
+            <p>From raw indicator to trusted explanation and action.</p>
+          </div>
+        </div>
+        <div class="workflow">
+          <div class="step-card">
+            <span>Step 1</span>
+            <h4>Ingest series</h4>
+            <p class="muted">Load monthly, quarterly, weekly, and daily economic time series.</p>
+          </div>
+          <div class="step-card">
+            <span>Step 2</span>
+            <h4>Add calendar</h4>
+            <p class="muted">Attach Ramadan, Eid, public holidays, working days, events, and heat days.</p>
+          </div>
+          <div class="step-card">
+            <span>Step 3</span>
+            <h4>Decompose</h4>
+            <p class="muted">Use X-13, STL, TBATS, moving-holiday regressors, and outlier handling.</p>
+          </div>
+          <div class="step-card">
+            <span>Step 4</span>
+            <h4>Explain</h4>
+            <p class="muted">Generate plain-language seasonal context in English and Arabic.</p>
+          </div>
+          <div class="step-card">
+            <span>Step 5</span>
+            <h4>Alert</h4>
+            <p class="muted">Flag anomalies, residual seasonality, model drift, and evolving patterns.</p>
+          </div>
+          <div class="step-card">
+            <span>Step 6</span>
+            <h4>Publish</h4>
+            <p class="muted">Expose adjusted series, diagnostics, metadata, reports, exports, and APIs.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="analyzer">
+        <div class="section-header">
+          <div>
+            <h3>3. Indicator analyzer</h3>
+            <p>Select an indicator to see raw vs adjusted values, seasonal drivers, and AI interpretation.</p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="field">
+            <label>Indicator</label>
+            <select id="indicatorSelect" onchange="updateIndicator()">
+              <option value="retail">Monthly Retail Sales</option>
+              <option value="construction">Quarterly Construction Output</option>
+              <option value="cpiFood">CPI Food Index</option>
+              <option value="tourism">Hotel Occupancy Rate</option>
+              <option value="labour">Quarterly Unemployment Rate</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Geography</label>
+            <select>
+              <option>Abu Dhabi Emirate</option>
+              <option>Abu Dhabi City</option>
+              <option>Al Ain</option>
+              <option>Al Dhafra</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Frequency</label>
+            <select>
+              <option>Auto</option>
+              <option>Monthly</option>
+              <option>Quarterly</option>
+              <option>Weekly</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Model</label>
+            <select id="modelSelect" onchange="updateModelBadge()">
+              <option>X-13ARIMA-SEATS</option>
+              <option>STL</option>
+              <option>TBATS</option>
+              <option>Auto-select best model</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Language</label>
+            <select id="languageSelect" onchange="updateLanguage()">
+              <option>English</option>
+              <option>Arabic mock</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="metric-card">
+            <div class="label">Raw change</div>
+            <div class="value danger" id="rawChange">-15.2%</div>
+            <div class="sub" id="rawSub">Observed MoM movement</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Seasonal effect</div>
+            <div class="value warning" id="seasonalEffect">-12.0 pp</div>
+            <div class="sub" id="seasonalSub">Post-Ramadan normalization</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Adjusted change</div>
+            <div class="value positive" id="adjustedChange">+1.2%</div>
+            <div class="sub">Underlying movement after adjustment</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Confidence</div>
+            <div class="value info" id="confidence">High</div>
+            <div class="sub" id="modelBadge">X-13ARIMA-SEATS, diagnostics passed</div>
+          </div>
+        </div>
+
+        <div class="grid-2 section">
+          <div class="panel">
+            <h4>Raw vs seasonally adjusted chart</h4>
+            <p class="muted">Mock chart: the raw line moves sharply because of calendar events; the adjusted line shows underlying momentum.</p>
+            <div class="chart-wrap">
+              <svg id="seriesChart" viewBox="0 0 820 300" role="img" aria-label="Raw and seasonally adjusted time series chart">
+                <rect x="0" y="0" width="820" height="300" fill="#f8fafc"></rect>
+                <rect x="84" y="20" width="88" height="240" fill="#eff6ff"></rect>
+                <rect x="418" y="20" width="162" height="240" fill="#fffbeb"></rect>
+                <rect x="635" y="20" width="95" height="240" fill="#ecfeff"></rect>
+                <line x1="48" y1="260" x2="790" y2="260" stroke="#cbd5e1"></line>
+                <line x1="48" y1="205" x2="790" y2="205" stroke="#e2e8f0"></line>
+                <line x1="48" y1="150" x2="790" y2="150" stroke="#e2e8f0"></line>
+                <line x1="48" y1="95" x2="790" y2="95" stroke="#e2e8f0"></line>
+                <line x1="48" y1="40" x2="790" y2="40" stroke="#e2e8f0"></line>
+                <polyline id="rawLine" fill="none" stroke="#2563eb" stroke-width="4" points="55,190 120,110 185,205 250,170 315,160 380,145 445,215 510,238 575,195 640,115 705,92 770,160"></polyline>
+                <polyline id="adjustedLine" fill="none" stroke="#16a34a" stroke-width="4" points="55,168 120,160 185,155 250,150 315,144 380,141 445,136 510,132 575,129 640,126 705,121 770,118"></polyline>
+                <polyline id="trendLine" fill="none" stroke="#d97706" stroke-width="3" stroke-dasharray="7 7" points="55,174 120,166 185,159 250,153 315,147 380,142 445,137 510,132 575,128 640,123 705,119 770,115"></polyline>
+                <text x="95" y="38" fill="#1d4ed8" font-size="12" font-weight="700">Ramadan</text>
+                <text x="455" y="38" fill="#b45309" font-size="12" font-weight="700">Summer heat</text>
+                <text x="648" y="38" fill="#0e7490" font-size="12" font-weight="700">Tourism peak</text>
+              </svg>
+              <div class="legend">
+                <span class="legend-item"><span class="dot"></span> Raw series</span>
+                <span class="legend-item"><span class="dot green"></span> Seasonally adjusted</span>
+                <span class="legend-item"><span class="dot amber"></span> Trend-cycle</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h4>AI seasonal explanation</h4>
+            <div class="ai-response" id="indicatorExplanation">
+              Retail sales declined 15.2% in January, but 12.0 percentage points
+              are explained by post-Ramadan normalization and 2.0 percentage
+              points by fewer working days. Seasonally adjusted retail sales rose
+              1.2%, indicating positive underlying consumer demand.
+            </div>
+            <div class="pill-row">
+              <span class="badge green" id="driverBadge">Main driver: Post-Ramadan</span>
+              <span class="badge cyan">Raw and SA series published</span>
+              <span class="badge amber">Review if irregular &gt; 2 sigma</span>
+            </div>
+            <div class="section">
+              <button class="button small" onclick="generateAnnotation()">Regenerate explanation</button>
+              <button class="button secondary small" onclick="copyMockReport()">Copy report text</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2 section">
+          <div class="panel">
+            <h4>Component decomposition</h4>
+            <p class="muted">The system stores each component so economists can see exactly what was removed.</p>
+            <div class="component-row">
+              <span>Seasonal</span>
+              <div class="track"><div class="bar seasonal" id="seasonalBar" style="width: 76%;"></div></div>
+              <strong id="seasonalValue">-12.0 pp</strong>
+            </div>
+            <div class="component-row">
+              <span>Calendar</span>
+              <div class="track"><div class="bar calendar" id="calendarBar" style="width: 34%;"></div></div>
+              <strong id="calendarValue">-2.0 pp</strong>
+            </div>
+            <div class="component-row">
+              <span>Trend-cycle</span>
+              <div class="track"><div class="bar trend" id="trendBar" style="width: 42%;"></div></div>
+              <strong id="trendValue">+0.9 pp</strong>
+            </div>
+            <div class="component-row">
+              <span>Irregular</span>
+              <div class="track"><div class="bar irregular" id="irregularBar" style="width: 15%;"></div></div>
+              <strong id="irregularValue">+0.3 pp</strong>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h4>Decision guidance</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Mock answer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Is the raw movement misleading?</td>
+                  <td id="misleadingCell">Yes. Most of the decline is seasonal.</td>
+                </tr>
+                <tr>
+                  <td>Should a policy alert be issued?</td>
+                  <td id="policyCell">No critical alert. Underlying movement is positive.</td>
+                </tr>
+                <tr>
+                  <td>What should the analyst write?</td>
+                  <td id="analystCell">Use seasonally adjusted growth for short-term momentum.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="calendar">
+        <div class="section-header">
+          <div>
+            <h3>4. Abu Dhabi calendar intelligence</h3>
+            <p>The core advanced feature: Gregorian + Hijri + weather + tourism + retail-event context.</p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="month-card tourism"><strong>Jan</strong>Tourism peak<br>Retail normalization</div>
+          <div class="month-card ramadan"><strong>Feb</strong>Ramadan starts<br>Food demand rises</div>
+          <div class="month-card eid"><strong>Mar</strong>Eid Al Fitr<br>Travel and retail</div>
+          <div class="month-card"><strong>Apr</strong>School cycle<br>Normal working days</div>
+          <div class="month-card"><strong>May</strong>Pre-summer transition</div>
+          <div class="month-card heat"><strong>Jun</strong>Heat period<br>Outdoor activity slows</div>
+          <div class="month-card heat"><strong>Jul</strong>Extreme heat<br>Construction slowdown</div>
+          <div class="month-card heat"><strong>Aug</strong>Extreme heat<br>Tourism softer</div>
+          <div class="month-card heat"><strong>Sep</strong>Heat easing<br>Back-to-school</div>
+          <div class="month-card tourism"><strong>Oct</strong>Tourism season starts</div>
+          <div class="month-card tourism"><strong>Nov</strong>White Friday<br>Events season</div>
+          <div class="month-card tourism"><strong>Dec</strong>National Day<br>Year-end spending</div>
+        </div>
+
+        <div class="grid-3 section">
+          <div class="mini-card">
+            <strong>Moving holidays</strong>
+            <p class="muted">Ramadan and Eid shift around 11 days earlier each Gregorian year, so the system counts holiday days inside each month or quarter.</p>
+          </div>
+          <div class="mini-card">
+            <strong>Working-day adjustment</strong>
+            <p class="muted">The engine adjusts for weekends, UAE public holidays, number of working days, and trading days in each period.</p>
+          </div>
+          <div class="mini-card">
+            <strong>Seasonal driver library</strong>
+            <p class="muted">Summer heat, tourism peak, fiscal year cycle, e-commerce events, and school calendar are stored as reusable regressors.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="alerts">
+        <div class="section-header">
+          <div>
+            <h3>5. Real-time alert center</h3>
+            <p>Alerts are generated when new data arrives, model diagnostics fail, or seasonal patterns evolve.</p>
+          </div>
+          <button class="button small" onclick="simulateAlert()">Add mock alert</button>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <h4>Open alerts</h4>
+            <div class="alert-list" id="alertList">
+              <div class="alert-card high">
+                <span class="badge red">High</span>
+                <h4>Residual seasonality detected in CPI Food</h4>
+                <p class="muted">Spectral test indicates remaining seasonal pattern after adjustment. Re-estimation recommended.</p>
+              </div>
+              <div class="alert-card medium">
+                <span class="badge amber">Medium</span>
+                <h4>Construction output below normal summer range</h4>
+                <p class="muted">Q3 decline is 30%; historical summer norm is 18% to 25%. Non-seasonal weakness may exist.</p>
+              </div>
+              <div class="alert-card advisory">
+                <span class="badge">Advisory</span>
+                <h4>Retail seasonality shifting from December to November</h4>
+                <p class="muted">White Friday and e-commerce growth appear to increase November seasonal factors.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h4>Alert logic</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Alert type</th>
+                  <th>Trigger</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Seasonal anomaly</td>
+                  <td>Irregular component exceeds threshold, e.g. &gt;2 standard deviations</td>
+                  <td>Domain specialist review</td>
+                </tr>
+                <tr>
+                  <td>Evolving seasonality</td>
+                  <td>Seasonal factor changes materially over re-estimation cycles</td>
+                  <td>Update model specification</td>
+                </tr>
+                <tr>
+                  <td>Residual seasonality</td>
+                  <td>Adjusted series still shows seasonal pattern</td>
+                  <td>Block or flag SA publication</td>
+                </tr>
+                <tr>
+                  <td>Short history warning</td>
+                  <td>Series lacks enough observations for robust X-13</td>
+                  <td>Use STL/TBATS and mark confidence lower</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="assistant">
+        <div class="section-header">
+          <div>
+            <h3>6. AI research assistant</h3>
+            <p>Economists can ask plain-language questions and receive a structured analytical answer.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel assistant-box">
+            <div class="field">
+              <label>Ask a seasonality question</label>
+              <textarea id="questionInput">Why did construction output fall sharply in Q3?</textarea>
+            </div>
+            <div class="suggested">
+              <button onclick="askSuggested('Why did retail sales fall in January?')">Retail January</button>
+              <button onclick="askSuggested('Is the Q3 construction decline normal?')">Construction Q3</button>
+              <button onclick="askSuggested('Which indicators have residual seasonality?')">Diagnostics</button>
+              <button onclick="askSuggested('Is retail seasonality evolving?')">Evolving seasonality</button>
+            </div>
+            <button class="button" onclick="answerQuestion()">Generate AI analysis</button>
+          </div>
+
+          <div class="panel">
+            <h4>Mock AI answer</h4>
+            <div class="ai-response" id="assistantAnswer">
+              Q3 construction output fell sharply, but most of the decline is consistent
+              with the historical summer heat pattern. The raw decline is 22%, while
+              the expected seasonal effect is around 20 percentage points. The
+              seasonally adjusted decline is approximately 2%, so the result should
+              be described as a normal seasonal slowdown with limited non-seasonal
+              weakness.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="models">
+        <div class="section-header">
+          <div>
+            <h3>7. Models, diagnostics, and methodology</h3>
+            <p>This section gives Analytics Research full transparency and control.</p>
+          </div>
+        </div>
+
+        <div class="module-grid">
+          <div class="module-card">
+            <span class="badge">Primary</span>
+            <h4>X-13ARIMA-SEATS</h4>
+            <p class="muted">Use for official-style monthly and quarterly indicators with enough history: CPI, retail, GDP, trade, industrial production.</p>
+          </div>
+          <div class="module-card">
+            <span class="badge cyan">Flexible</span>
+            <h4>STL decomposition</h4>
+            <p class="muted">Use for exploratory analysis, shorter series, and indicators where seasonality evolves gradually.</p>
+          </div>
+          <div class="module-card">
+            <span class="badge purple">Advanced</span>
+            <h4>TBATS</h4>
+            <p class="muted">Use for complex multi-seasonal patterns in daily or weekly data, such as transactions, mobility, or electricity demand.</p>
+          </div>
+        </div>
+
+        <div class="grid-2 section">
+          <div class="panel">
+            <h4>Diagnostics table</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Indicator</th>
+                  <th>Model</th>
+                  <th>Residual seasonality</th>
+                  <th>Stability</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Retail Sales</td>
+                  <td>X-13 + Ramadan regressors</td>
+                  <td>Pass</td>
+                  <td>0.91</td>
+                  <td><span class="badge green">Publish</span></td>
+                </tr>
+                <tr>
+                  <td>Construction Output</td>
+                  <td>STL + heat variable</td>
+                  <td>Warning</td>
+                  <td>0.74</td>
+                  <td><span class="badge amber">Review</span></td>
+                </tr>
+                <tr>
+                  <td>CPI Food</td>
+                  <td>X-13 + Ramadan/Eid</td>
+                  <td>Fail</td>
+                  <td>0.62</td>
+                  <td><span class="badge red">Hold SA</span></td>
+                </tr>
+                <tr>
+                  <td>Hotel Occupancy</td>
+                  <td>X-13 + tourism season</td>
+                  <td>Pass</td>
+                  <td>0.87</td>
+                  <td><span class="badge green">Publish</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="panel">
+            <h4>Methodology controls</h4>
+            <div class="grid-2">
+              <div class="field">
+                <label>Decomposition type</label>
+                <select>
+                  <option>Auto: additive or multiplicative</option>
+                  <option>Additive</option>
+                  <option>Multiplicative</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Outlier treatment</label>
+                <select>
+                  <option>Conservative auto-detection</option>
+                  <option>Manual analyst review</option>
+                  <option>Disable for this run</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Ramadan regression</label>
+                <select>
+                  <option>Pre / during / post Ramadan</option>
+                  <option>Days of Ramadan in period only</option>
+                  <option>Disable Ramadan variable</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Quality gate</label>
+                <select>
+                  <option>Do not publish if diagnostics fail</option>
+                  <option>Publish with warning</option>
+                  <option>Research-only output</option>
+                </select>
+              </div>
+            </div>
+            <div class="section">
+              <button class="button small">Run model validation</button>
+              <button class="button secondary small">Open parameter log</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="data">
+        <div class="section-header">
+          <div>
+            <h3>8. Data collections and database design</h3>
+            <p>Mock data inventory for later real-data integration.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Collection / table</th>
+                <th>Purpose</th>
+                <th>Key fields</th>
+                <th>MVP or advanced</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>indicator_master</strong></td>
+                <td>Catalogues every economic indicator and its adjustment eligibility.</td>
+                <td>indicator_id, name, domain, frequency, unit, source, preferred_model, status</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>economic_observation</strong></td>
+                <td>Stores raw monthly, quarterly, weekly, and daily time-series values.</td>
+                <td>indicator_id, period, raw_value, unit, geography, vintage, status</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>calendar_day</strong></td>
+                <td>Maps Gregorian and Hijri dates with holidays and working days.</td>
+                <td>date, Hijri date, Ramadan flag, Eid flag, weekend flag, holiday name</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>period_calendar_features</strong></td>
+                <td>Aggregates calendar regressors by month or quarter.</td>
+                <td>working_days, holidays, Ramadan_days, Eid_days, heat_days, tourism_days</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>seasonal_event</strong></td>
+                <td>Stores Ramadan, Eid, summer heat, tourism season, fiscal, and retail events.</td>
+                <td>event_id, event_type, start_date, end_date, affected_domains, expected_direction</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>seasonal_model_spec</strong></td>
+                <td>Stores model configuration and approved parameters.</td>
+                <td>model_type, decomposition, regressors, outlier rules, version, approved_by</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>seasonal_model_run</strong></td>
+                <td>Records each batch or single indicator processing run.</td>
+                <td>run_id, model_spec_id, input_vintage, run_status, output_version</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>seasonal_decomposition_output</strong></td>
+                <td>Stores raw, adjusted, seasonal, calendar, trend, and irregular components.</td>
+                <td>raw_value, seasonal_component, calendar_component, trend, irregular, sa_value</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>model_diagnostics</strong></td>
+                <td>Stores quality test results and pass/fail status.</td>
+                <td>residual_test, p_value, outlier_count, stability_score, revision_size</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>seasonal_annotation</strong></td>
+                <td>Stores AI-generated English and Arabic explanations.</td>
+                <td>language, short_text, detailed_text, main_driver, severity, review_status</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>seasonality_alert</strong></td>
+                <td>Stores anomaly, evolving seasonality, residual seasonality, and data alerts.</td>
+                <td>alert_type, severity, expected_value, actual_value, deviation, owner, status</td>
+                <td><span class="badge green">MVP</span></td>
+              </tr>
+              <tr>
+                <td><strong>weather_observation</strong></td>
+                <td>Models summer heat effect on construction, tourism, labour, and electricity.</td>
+                <td>date, region, max_temperature, heat_index, extreme_heat_flag</td>
+                <td><span class="badge amber">Advanced</span></td>
+              </tr>
+              <tr>
+                <td><strong>high_frequency_observation</strong></td>
+                <td>Supports daily or weekly experimental seasonal analysis.</td>
+                <td>date, proxy_indicator, value, category, source, quality_flag</td>
+                <td><span class="badge amber">Advanced</span></td>
+              </tr>
+              <tr>
+                <td><strong>data_revision_history</strong></td>
+                <td>Tracks revisions and vintages for reproducible seasonal outputs.</td>
+                <td>indicator_id, period, old_value, new_value, vintage_date, reason</td>
+                <td><span class="badge amber">Advanced</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="section-header">
+          <div>
+            <h3>9. Architecture blueprint</h3>
+            <p>How the advanced tool fits into Bayaan and future real-time pipelines.</p>
+          </div>
+        </div>
+        <div class="architecture">
+          <div class="arch-box">
+            <strong>Data sources</strong>
+            CPI, GDP, labour, retail, trade, tourism, construction, high-frequency proxies
+          </div>
+          <div class="arch-box">
+            <strong>Calendar layer</strong>
+            Hijri mapping, Ramadan/Eid, public holidays, working days, heat, tourism, events
+          </div>
+          <div class="arch-box">
+            <strong>Seasonal engine</strong>
+            X-13, STL, TBATS, outlier detection, moving-holiday regressors, diagnostics
+          </div>
+          <div class="arch-box">
+            <strong>AI layer</strong>
+            Explanations, anomaly narratives, suggested actions, methodology notes, bilingual text
+          </div>
+          <div class="arch-box">
+            <strong>Bayaan output</strong>
+            Dashboard, API, alerts, exports, metadata, audit logs, companion SA indicators
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="governance">
+        <div class="section-header">
+          <div>
+            <h3>10. Governance, audit, and advanced controls</h3>
+            <p>Trust features needed for a powerful SCAD research-grade tool.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="mini-card">
+            <strong>Model governance</strong>
+            <p class="muted">Every model has a specification version, approval status, analyst owner, methodology notes, and parameter audit trail.</p>
+          </div>
+          <div class="mini-card">
+            <strong>Publication control</strong>
+            <p class="muted">Seasonally adjusted outputs inherit raw indicator permissions and can be marked internal, research-only, or publishable.</p>
+          </div>
+          <div class="mini-card">
+            <strong>Quality gates</strong>
+            <p class="muted">Residual seasonality failures, unstable factors, or excessive revisions can block publication automatically.</p>
+          </div>
+          <div class="mini-card">
+            <strong>Reproducibility</strong>
+            <p class="muted">Outputs are reproducible using the same raw data vintage, calendar table, model specification, and software version.</p>
+          </div>
+          <div class="mini-card">
+            <strong>Bilingual reporting</strong>
+            <p class="muted">Template and AI-assisted annotations are generated in English and Arabic with specialist review workflows.</p>
+          </div>
+          <div class="mini-card">
+            <strong>Extra advanced feature</strong>
+            <p class="muted">A seasonal-pattern drift score ranks indicators where patterns are changing due to e-commerce, climate, or behaviour shifts.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <h3>11. Example report output</h3>
+            <p>What a generated economist-ready summary could look like.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <h4>Quarterly seasonal digest - mock</h4>
+          <p>
+            <strong>Summary:</strong> Most Q3 weakness in construction and outdoor
+            labour indicators is consistent with Abu Dhabi's normal summer heat
+            pattern. Retail sales show evolving seasonality, with November gaining
+            seasonal strength as e-commerce discount events grow. CPI Food requires
+            model review because residual seasonality remains after Ramadan/Eid
+            adjustment.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Indicator</th>
+                <th>Raw movement</th>
+                <th>Seasonal explanation</th>
+                <th>Adjusted signal</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Construction Output</td>
+                <td>-22.0%</td>
+                <td>Summer heat explains around -20 pp</td>
+                <td>-2.0% underlying weakness</td>
+                <td>Monitor, no critical alert</td>
+              </tr>
+              <tr>
+                <td>Retail Sales</td>
+                <td>-15.2%</td>
+                <td>Post-Ramadan and working days explain most of decline</td>
+                <td>+1.2% underlying growth</td>
+                <td>Publish positive SA narrative</td>
+              </tr>
+              <tr>
+                <td>CPI Food</td>
+                <td>+2.6%</td>
+                <td>Ramadan demand explains part of rise</td>
+                <td>Model confidence low</td>
+                <td>Re-estimate model</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        Mock data only. This prototype is designed to explain the full Seasonality Pattern Highlighter concept before real data integration.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    var indicators = {
+      retail: {
+        rawChange: "-15.2%",
+        rawClass: "danger",
+        rawSub: "Observed MoM movement",
+        seasonalEffect: "-12.0 pp",
+        seasonalSub: "Post-Ramadan normalization",
+        adjustedChange: "+1.2%",
+        adjustedClass: "positive",
+        confidence: "High",
+        driver: "Main driver: Post-Ramadan",
+        model: "X-13ARIMA-SEATS, diagnostics passed",
+        explanation: "Retail sales declined 15.2% in January, but 12.0 percentage points are explained by post-Ramadan normalization and 2.0 percentage points by fewer working days. Seasonally adjusted retail sales rose 1.2%, indicating positive underlying consumer demand.",
+        seasonalValue: "-12.0 pp",
+        calendarValue: "-2.0 pp",
+        trendValue: "+0.9 pp",
+        irregularValue: "+0.3 pp",
+        seasonalWidth: "76%",
+        calendarWidth: "34%",
+        trendWidth: "42%",
+        irregularWidth: "15%",
+        misleading: "Yes. Most of the decline is seasonal.",
+        policy: "No critical alert. Underlying movement is positive.",
+        analyst: "Use seasonally adjusted growth for short-term momentum.",
+        rawPoints: "55,190 120,110 185,205 250,170 315,160 380,145 445,215 510,238 575,195 640,115 705,92 770,160",
+        adjustedPoints: "55,168 120,160 185,155 250,150 315,144 380,141 445,136 510,132 575,129 640,126 705,121 770,118"
+      },
+      construction: {
+        rawChange: "-22.0%",
+        rawClass: "danger",
+        rawSub: "Observed QoQ movement",
+        seasonalEffect: "-20.0 pp",
+        seasonalSub: "Summer heat slowdown",
+        adjustedChange: "-2.0%",
+        adjustedClass: "warning",
+        confidence: "Medium",
+        driver: "Main driver: Summer heat",
+        model: "STL with heat variable, review recommended",
+        explanation: "Construction output declined 22.0% in Q3. This is broadly consistent with Abu Dhabi's historical summer heat slowdown, where activity commonly falls between 18% and 25%. The seasonally adjusted decline is 2.0%, so analysts should describe this as mostly seasonal with limited non-seasonal weakness.",
+        seasonalValue: "-20.0 pp",
+        calendarValue: "-0.5 pp",
+        trendValue: "-1.0 pp",
+        irregularValue: "-1.0 pp",
+        seasonalWidth: "88%",
+        calendarWidth: "10%",
+        trendWidth: "24%",
+        irregularWidth: "24%",
+        misleading: "Yes. Raw decline exaggerates economic weakness.",
+        policy: "No immediate critical alert unless decline exceeds normal range.",
+        analyst: "State that Q3 weakness is mainly the summer construction cycle.",
+        rawPoints: "55,120 120,118 185,112 250,150 315,210 380,230 445,150 510,118 575,110 640,160 705,225 770,236",
+        adjustedPoints: "55,150 120,148 185,145 250,146 315,149 380,151 445,153 510,154 575,157 640,158 705,160 770,162"
+      },
+      cpiFood: {
+        rawChange: "+2.6%",
+        rawClass: "warning",
+        rawSub: "Observed MoM movement",
+        seasonalEffect: "+1.4 pp",
+        seasonalSub: "Ramadan food demand",
+        adjustedChange: "+1.2%",
+        adjustedClass: "warning",
+        confidence: "Low",
+        driver: "Main driver: Ramadan demand",
+        model: "X-13 with Ramadan/Eid, residual seasonality warning",
+        explanation: "CPI Food increased 2.6%. Around 1.4 percentage points are consistent with Ramadan-related seasonal food demand. The adjusted movement remains 1.2%, which may represent genuine food price pressure. However, diagnostics show residual seasonality, so the model should be re-estimated before strong conclusions are published.",
+        seasonalValue: "+1.4 pp",
+        calendarValue: "+0.6 pp",
+        trendValue: "+0.8 pp",
+        irregularValue: "+0.4 pp",
+        seasonalWidth: "44%",
+        calendarWidth: "28%",
+        trendWidth: "38%",
+        irregularWidth: "18%",
+        misleading: "Partly. Seasonal effects explain some, not all, of the rise.",
+        policy: "Review food inflation drivers and re-estimate model.",
+        analyst: "Mention both Ramadan effect and remaining underlying pressure.",
+        rawPoints: "55,198 120,188 185,170 250,135 315,115 380,125 445,152 510,160 575,148 640,140 705,132 770,126",
+        adjustedPoints: "55,175 120,172 185,168 250,165 315,162 380,158 445,154 510,151 575,147 640,143 705,139 770,135"
+      },
+      tourism: {
+        rawChange: "+18.0%",
+        rawClass: "positive",
+        rawSub: "Observed MoM movement",
+        seasonalEffect: "+15.0 pp",
+        seasonalSub: "Winter tourism peak",
+        adjustedChange: "+3.0%",
+        adjustedClass: "positive",
+        confidence: "High",
+        driver: "Main driver: Tourism season",
+        model: "X-13 with tourism-season regressor",
+        explanation: "Hotel occupancy rose 18.0%. Around 15.0 percentage points are expected during the October-March tourism peak. The seasonally adjusted gain is 3.0%, suggesting tourism activity is stronger than normal seasonal expectations.",
+        seasonalValue: "+15.0 pp",
+        calendarValue: "+1.0 pp",
+        trendValue: "+2.4 pp",
+        irregularValue: "+0.6 pp",
+        seasonalWidth: "80%",
+        calendarWidth: "20%",
+        trendWidth: "48%",
+        irregularWidth: "20%",
+        misleading: "Partly. Most growth is seasonal, but adjusted growth is still positive.",
+        policy: "No warning. Positive underlying tourism signal.",
+        analyst: "Show both tourism peak effect and extra underlying strength.",
+        rawPoints: "55,220 120,180 185,130 250,95 315,90 380,115 445,185 510,225 575,235 640,170 705,115 770,88",
+        adjustedPoints: "55,170 120,166 185,162 250,158 315,153 380,148 445,145 510,143 575,140 640,135 705,130 770,126"
+      },
+      labour: {
+        rawChange: "+0.4 pp",
+        rawClass: "warning",
+        rawSub: "Observed QoQ movement",
+        seasonalEffect: "+0.3 pp",
+        seasonalSub: "Summer labour slowdown",
+        adjustedChange: "+0.1 pp",
+        adjustedClass: "warning",
+        confidence: "Medium",
+        driver: "Main driver: Seasonal hiring cycle",
+        model: "X-13, annual review due",
+        explanation: "The unemployment rate increased by 0.4 percentage points. Around 0.3 percentage points are consistent with seasonal labour patterns, including summer slowdown and tourism hiring cycle timing. The seasonally adjusted increase is 0.1 percentage points, indicating only mild labour market softening.",
+        seasonalValue: "+0.3 pp",
+        calendarValue: "+0.1 pp",
+        trendValue: "+0.1 pp",
+        irregularValue: "0.0 pp",
+        seasonalWidth: "36%",
+        calendarWidth: "12%",
+        trendWidth: "14%",
+        irregularWidth: "2%",
+        misleading: "Yes. Raw change overstates labour market softening.",
+        policy: "Monitor but do not interpret as major labour market weakness.",
+        analyst: "Use SA unemployment for quarter-on-quarter comparison.",
+        rawPoints: "55,155 120,150 185,142 250,138 315,148 380,165 445,158 510,150 575,144 640,139 705,149 770,166",
+        adjustedPoints: "55,150 120,149 185,148 250,147 315,147 380,148 445,148 510,149 575,149 640,150 705,150 770,151"
+      }
+    };
+
+    var alertMessages = [
+      "Retail sales January movement is mostly post-Ramadan seasonality; adjusted sales are positive.",
+      "Construction Q3 decline is within the historical summer heat range.",
+      "CPI Food residual seasonality test failed; model re-estimation recommended.",
+      "Retail November factor is rising, suggesting White Friday seasonality is becoming stronger.",
+      "Hotel occupancy exceeds normal tourism-season expectations after adjustment."
+    ];
+
+    function setClass(el, cls) {
+      el.classList.remove("positive", "warning", "danger", "info");
+      el.classList.add(cls);
+    }
+
+    function updateIndicator() {
+      var key = document.getElementById("indicatorSelect").value;
+      var item = indicators[key];
+
+      document.getElementById("rawChange").textContent = item.rawChange;
+      setClass(document.getElementById("rawChange"), item.rawClass);
+      document.getElementById("rawSub").textContent = item.rawSub;
+
+      document.getElementById("seasonalEffect").textContent = item.seasonalEffect;
+      document.getElementById("seasonalSub").textContent = item.seasonalSub;
+      document.getElementById("adjustedChange").textContent = item.adjustedChange;
+      setClass(document.getElementById("adjustedChange"), item.adjustedClass);
+      document.getElementById("confidence").textContent = item.confidence;
+      document.getElementById("modelBadge").textContent = item.model;
+      document.getElementById("indicatorExplanation").textContent = item.explanation;
+      document.getElementById("driverBadge").textContent = item.driver;
+
+      document.getElementById("seasonalValue").textContent = item.seasonalValue;
+      document.getElementById("calendarValue").textContent = item.calendarValue;
+      document.getElementById("trendValue").textContent = item.trendValue;
+      document.getElementById("irregularValue").textContent = item.irregularValue;
+      document.getElementById("seasonalBar").style.width = item.seasonalWidth;
+      document.getElementById("calendarBar").style.width = item.calendarWidth;
+      document.getElementById("trendBar").style.width = item.trendWidth;
+      document.getElementById("irregularBar").style.width = item.irregularWidth;
+
+      document.getElementById("misleadingCell").textContent = item.misleading;
+      document.getElementById("policyCell").textContent = item.policy;
+      document.getElementById("analystCell").textContent = item.analyst;
+      document.getElementById("rawLine").setAttribute("points", item.rawPoints);
+      document.getElementById("adjustedLine").setAttribute("points", item.adjustedPoints);
+      document.getElementById("tickerText").textContent = item.explanation;
+    }
+
+    function updateModelBadge() {
+      var model = document.getElementById("modelSelect").value;
+      document.getElementById("modelBadge").textContent = model + " selected for this mock run";
+    }
+
+    function updateLanguage() {
+      var language = document.getElementById("languageSelect").value;
+      if (language === "Arabic mock") {
+        document.getElementById("indicatorExplanation").textContent =
+          "Arabic mock: The selected indicator movement is separated into seasonal, calendar, trend, and irregular components. Real Arabic copy would be reviewed by bilingual SCAD specialists.";
+      } else {
+        updateIndicator();
+      }
+    }
+
+    function generateAnnotation() {
+      var key = document.getElementById("indicatorSelect").value;
+      var item = indicators[key];
+      document.getElementById("indicatorExplanation").textContent =
+        item.explanation + " Suggested next step: check diagnostics, review seasonal driver contribution, and use the adjusted value in short-term analysis.";
+    }
+
+    function copyMockReport() {
+      document.getElementById("tickerText").textContent = "Mock report text prepared for export. In production this would copy or export a PDF/Excel brief.";
+    }
+
+    function simulateAlert() {
+      var list = document.getElementById("alertList");
+      var count = parseInt(document.getElementById("openAlerts").textContent, 10) + 1;
+      document.getElementById("openAlerts").textContent = count;
+      var div = document.createElement("div");
+      div.className = "alert-card advisory";
+      div.innerHTML =
+        "<span class='badge'>Advisory</span>" +
+        "<h4>New mock alert: seasonal pattern drift detected</h4>" +
+        "<p class='muted'>The system detected a change in expected seasonal factors. Analyst review is recommended before the next publication cycle.</p>";
+      list.insertBefore(div, list.firstChild);
+      document.getElementById("tickerText").textContent = "New mock alert generated: seasonal pattern drift detected.";
+    }
+
+    function refreshMock() {
+      var idx = Math.floor(Math.random() * alertMessages.length);
+      document.getElementById("tickerText").textContent = alertMessages[idx];
+    }
+
+    function askSuggested(text) {
+      document.getElementById("questionInput").value = text;
+      answerQuestion();
+    }
+
+    function answerQuestion() {
+      var q = document.getElementById("questionInput").value.toLowerCase();
+      var answer = "";
+      if (q.indexOf("retail") >= 0) {
+        answer = "Retail sales movement should be interpreted using the seasonally adjusted series. The raw decline is mostly explained by post-Ramadan normalization and working-day differences. The adjusted value shows positive underlying demand. Also monitor November and December because e-commerce events may be shifting seasonality.";
+      } else if (q.indexOf("construction") >= 0) {
+        answer = "Construction output is highly affected by the June-September heat cycle. The Q3 decline is mostly seasonal if it remains within the historical summer range. If the irregular component exceeds the threshold, create a medium or high alert for Industrial and Business Statistics review.";
+      } else if (q.indexOf("diagnostic") >= 0 || q.indexOf("residual") >= 0) {
+        answer = "The diagnostic view shows CPI Food failing residual seasonality checks. The recommended action is to hold or flag the seasonally adjusted series, re-estimate Ramadan and Eid regressors, and validate against recent food price behavior.";
+      } else if (q.indexOf("evolving") >= 0) {
+        answer = "Evolving seasonality is detected when seasonal factors shift materially over multiple model runs. A common example is retail spending moving from December to November due to White Friday and e-commerce promotions.";
+      } else {
+        answer = "The AI assistant decomposes the indicator into seasonal, calendar, trend-cycle, and irregular components, then explains whether the movement is normal seasonality or a genuine economic signal.";
+      }
+      document.getElementById("assistantAnswer").textContent = answer;
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  </script>
+</body>
+</html>
