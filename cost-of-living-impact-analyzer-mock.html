@@ -300,6 +300,113 @@
       color: var(--muted);
     }
 
+    .objective-statement {
+      background: linear-gradient(135deg, #eff6ff, #ecfeff);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .objective-statement strong {
+      color: #1d4ed8;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .detail-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .detail-card .number {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .detail-card h4 {
+      margin: 0 0 8px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #334155;
+      padding: 6px 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .flow-step {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      position: relative;
+    }
+
+    .flow-step span {
+      display: inline-block;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .flow-step h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .output-card {
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      background: #f8fafc;
+      padding: 14px;
+    }
+
+    .output-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
     .bar-row {
       display: grid;
       grid-template-columns: 120px 1fr 56px;
@@ -447,6 +554,9 @@
       .grid-2,
       .cards,
       .grid-3,
+      .detail-grid,
+      .workflow,
+      .output-grid,
       .filters,
       .scenario {
         grid-template-columns: 1fr;
@@ -467,6 +577,8 @@
 
       <div class="nav-title">Cost of living analyzer</div>
       <a class="nav-item active" href="#overview">Overview Dashboard</a>
+      <a class="nav-item" href="#objective">Objective Details</a>
+      <a class="nav-item" href="#workflow">How It Works</a>
       <a class="nav-item" href="#segments">Population Segments</a>
       <a class="nav-item" href="#datasets">Datasets and Fields</a>
       <a class="nav-item" href="#simulation">Policy Simulation</a>
@@ -482,30 +594,161 @@
           <span class="eyebrow">Mock UI for understanding the use case</span>
           <h2>Cost of Living Impact Analyzer</h2>
           <p>
-            This dashboard helps economists compare headline CPI with the actual
-            cost pressure felt by different household groups, such as low-income
-            expatriate workers or Emirati families with school-age children.
+            An AI-powered Bayaan module for SCAD Research & Innovation economists
+            to integrate prices, wages, housing, food, fuel, and household survey
+            data into detailed cost-of-living analysis for Abu Dhabi.
           </p>
           <button class="button">Generate analysis</button>
           <button class="button secondary">Export brief</button>
         </div>
         <div class="prompt-box">
-          <label>Example AI question</label>
+          <label>Objective in simple words</label>
           <div class="question">
-            How has the real cost of living changed for middle-income Emirati
-            families with school-age children over the past two years?
+            Help economists measure, compare, and simulate how rising living
+            costs affect different population groups in Abu Dhabi.
           </div>
           <p class="muted">
-            The AI answers by combining CPI, income, rent, education, fuel,
-            utility, and household expenditure data.
+            Instead of only showing headline CPI, the tool explains the real
+            pressure felt by each segment.
           </p>
+        </div>
+      </section>
+
+      <section class="section" id="objective">
+        <div class="section-header">
+          <div>
+            <h3>1. Objective details</h3>
+            <p>What the objective means inside the application.</p>
+          </div>
+        </div>
+        <div class="objective-statement">
+          <strong>Goal:</strong>
+          Equip R&I economics specialists with an AI analytical tool inside
+          Bayaan that combines CPI, wage, housing, food, fuel, and household
+          survey data to produce distributional cost-of-living analysis by
+          income group, nationality, and family composition, with policy
+          simulation for rent caps, subsidies, and price changes.
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="detail-grid">
+          <div class="detail-card">
+            <div class="number">A</div>
+            <h4>Integrate economic datasets</h4>
+            <p class="muted">
+              The tool connects multiple sources that economists currently
+              combine manually.
+            </p>
+            <div class="tag-list">
+              <span class="tag">CPI categories</span>
+              <span class="tag">Wages</span>
+              <span class="tag">Housing rents</span>
+              <span class="tag">Food prices</span>
+              <span class="tag">Fuel prices</span>
+              <span class="tag">Household survey</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="number">B</div>
+            <h4>Analyze specific groups</h4>
+            <p class="muted">
+              Economists choose the population segment and the AI calculates
+              that group's effective inflation and purchasing-power change.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Income group</span>
+              <span class="tag">Nationality</span>
+              <span class="tag">Family composition</span>
+              <span class="tag">Household size</span>
+              <span class="tag">Housing tenure</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="number">C</div>
+            <h4>Simulate policy options</h4>
+            <p class="muted">
+              Users can test hypothetical policy changes before decisions are
+              made and see which groups benefit or face extra pressure.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Rent caps</span>
+              <span class="tag">Subsidy changes</span>
+              <span class="tag">Fuel adjustment</span>
+              <span class="tag">Food shocks</span>
+              <span class="tag">School fees</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="section-header">
+          <div>
+            <h3>2. How the AI workflow works</h3>
+            <p>From raw data to an economist-ready answer.</p>
+          </div>
+        </div>
+        <div class="workflow">
+          <div class="flow-step">
+            <span>Step 1</span>
+            <h4>Ingest data</h4>
+            <p class="muted">Pull CPI, wages, rents, prices, tariffs, and HIES expenditure shares.</p>
+          </div>
+          <div class="flow-step">
+            <span>Step 2</span>
+            <h4>Build segment</h4>
+            <p class="muted">Filter by income, nationality, household type, and geography.</p>
+          </div>
+          <div class="flow-step">
+            <span>Step 3</span>
+            <h4>Re-weight basket</h4>
+            <p class="muted">Use the segment's spending pattern instead of the average CPI basket.</p>
+          </div>
+          <div class="flow-step">
+            <span>Step 4</span>
+            <h4>Calculate impact</h4>
+            <p class="muted">Compare effective inflation, wages, real income, and category pressure.</p>
+          </div>
+          <div class="flow-step">
+            <span>Step 5</span>
+            <h4>Explain and export</h4>
+            <p class="muted">Generate charts, insight text, methodology notes, and files.</p>
+          </div>
         </div>
       </section>
 
       <section class="section">
         <div class="section-header">
           <div>
-            <h3>1. Choose the population group</h3>
+            <h3>3. What economists get from the tool</h3>
+            <p>These are the main decision-support outputs from the objective.</p>
+          </div>
+        </div>
+        <div class="output-grid">
+          <div class="output-card">
+            <strong>Segment inflation</strong>
+            <span class="muted">Example: low-income renter households experience 4.4% effective inflation.</span>
+          </div>
+          <div class="output-card">
+            <strong>Real income change</strong>
+            <span class="muted">Example: wage growth is 2.4%, but effective inflation is 3.8%.</span>
+          </div>
+          <div class="output-card">
+            <strong>Policy impact</strong>
+            <span class="muted">Example: a rent cap improves disposable income by AED 420 per month.</span>
+          </div>
+          <div class="output-card">
+            <strong>Report-ready insight</strong>
+            <span class="muted">Example: housing and food explain most pressure for the selected segment.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <h3>4. Choose the population group</h3>
             <p>Select filters to compare cost-of-living impact by segment.</p>
           </div>
         </div>
@@ -651,7 +894,7 @@
       <section class="section" id="datasets">
         <div class="section-header">
           <div>
-            <h3>2. Datasets and fields needed</h3>
+            <h3>5. Datasets and fields needed</h3>
             <p>The analyzer needs these datasets to create reliable results.</p>
           </div>
         </div>
@@ -708,7 +951,7 @@
       <section class="section" id="simulation">
         <div class="section-header">
           <div>
-            <h3>3. Policy simulation module</h3>
+            <h3>6. Policy simulation module</h3>
             <p>Users test hypothetical policy changes and see who is affected.</p>
           </div>
         </div>
@@ -758,7 +1001,7 @@
       <section class="section" id="insights">
         <div class="section-header">
           <div>
-            <h3>4. AI-generated explanation</h3>
+            <h3>7. AI-generated explanation</h3>
             <p>This is the type of plain-language output the AI can produce.</p>
           </div>
         </div>
