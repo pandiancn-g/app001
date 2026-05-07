@@ -683,6 +683,58 @@
       margin-bottom: 8px;
     }
 
+    .objective-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .objective-item {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: white;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .objective-item .icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .objective-item h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .indicator-summary {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .indicator-chip {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #f8fafc;
+      padding: 12px;
+      font-size: 13px;
+    }
+
+    .indicator-chip strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
     .footer-note {
       color: var(--muted);
       text-align: center;
@@ -708,6 +760,8 @@
       .toolbar,
       .workflow,
       .module-grid,
+      .objective-grid,
+      .indicator-summary,
       .architecture,
       .timeline {
         grid-template-columns: 1fr;
@@ -728,6 +782,8 @@
 
       <div class="nav-title">Seasonality highlighter</div>
       <a class="nav-item active" href="#overview">Overview</a>
+      <a class="nav-item" href="#objective-coverage">Objective Coverage</a>
+      <a class="nav-item" href="#all-indicators">All Indicators</a>
       <a class="nav-item" href="#command">Command Center</a>
       <a class="nav-item" href="#analyzer">Indicator Analyzer</a>
       <a class="nav-item" href="#calendar">Calendar Intelligence</a>
@@ -782,10 +838,167 @@
         </div>
       </section>
 
+      <section class="section" id="objective-coverage">
+        <div class="section-header">
+          <div>
+            <h3>1. Objective coverage panel</h3>
+            <p>Every objective point from the PRD is represented as a visible product capability.</p>
+          </div>
+        </div>
+        <div class="objective-grid">
+          <div class="objective-item">
+            <div class="icon">1</div>
+            <h4>Detect and decompose</h4>
+            <p class="muted">
+              Automatically decomposes raw economic time series into seasonal,
+              calendar, trend-cycle, and irregular components using X-13, STL,
+              or TBATS.
+            </p>
+            <span class="badge green">Covered</span>
+          </div>
+          <div class="objective-item">
+            <div class="icon">2</div>
+            <h4>Annotate every observation</h4>
+            <p class="muted">
+              Shows the percentage or percentage-point contribution from
+              seasonal vs. non-seasonal factors with plain-language context.
+            </p>
+            <span class="badge green">Covered</span>
+          </div>
+          <div class="objective-item">
+            <div class="icon">3</div>
+            <h4>Publish raw and adjusted</h4>
+            <p class="muted">
+              Publishes companion raw, seasonally adjusted, and trend series
+              with downloadable tables, APIs, metadata, and methodology notes.
+            </p>
+            <span class="badge green">Covered</span>
+          </div>
+          <div class="objective-item">
+            <div class="icon">4</div>
+            <h4>Alert specialists</h4>
+            <p class="muted">
+              Flags seasonal anomalies, evolving patterns, residual seasonality,
+              model breakdown, short history, and unexpected irregular shocks.
+            </p>
+            <span class="badge amber">Live mock</span>
+          </div>
+          <div class="objective-item">
+            <div class="icon">5</div>
+            <h4>Support dual calendar</h4>
+            <p class="muted">
+              Uses Hijri-Gregorian mapping, Ramadan and Eid moving-holiday
+              regressors, UAE public holidays, working days, and event windows.
+            </p>
+            <span class="badge cyan">UAE-specific</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="all-indicators">
+        <div class="section-header">
+          <div>
+            <h3>2. All major indicator coverage</h3>
+            <p>Portfolio view showing how every economic indicator family is handled in the advanced UI.</p>
+          </div>
+          <button class="button small" onclick="scrollToSection('alerts')">Review flagged indicators</button>
+        </div>
+
+        <div class="indicator-summary">
+          <div class="indicator-chip"><strong>GDP</strong>Quarterly components</div>
+          <div class="indicator-chip"><strong>Prices</strong>CPI, PPI, food, transport</div>
+          <div class="indicator-chip"><strong>Labour</strong>Employment, unemployment, vacancies</div>
+          <div class="indicator-chip"><strong>Production</strong>IPI, construction, business output</div>
+          <div class="indicator-chip"><strong>Trade</strong>Imports, exports, re-exports</div>
+          <div class="indicator-chip"><strong>Tourism</strong>Arrivals, hotels, occupancy</div>
+        </div>
+
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Indicator family</th>
+                <th>Example indicators</th>
+                <th>Method</th>
+                <th>Seasonal drivers detected</th>
+                <th>Output shown</th>
+                <th>Alert coverage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>GDP and national accounts</strong></td>
+                <td>GDP, household consumption, government spending, GFCF, imports, exports</td>
+                <td>X-13ARIMA-SEATS for mature series; STL for short component series</td>
+                <td>Ramadan timing, summer construction dip, fiscal year spending, working days</td>
+                <td>Raw QoQ, SA QoQ, trend-cycle, seasonal contribution, publication status</td>
+                <td><span class="badge green">Momentum alerts</span></td>
+              </tr>
+              <tr>
+                <td><strong>Prices and inflation</strong></td>
+                <td>CPI food, clothing, housing, transport, utilities, PPI</td>
+                <td>X-13 with Ramadan/Eid and trading-day regressors</td>
+                <td>Ramadan food demand, back-to-school clothing, summer cooling, fuel timing</td>
+                <td>Raw index, SA index, underlying inflation note, residual test</td>
+                <td><span class="badge red">Residual SA checks</span></td>
+              </tr>
+              <tr>
+                <td><strong>Labour market</strong></td>
+                <td>Employment, unemployment, vacancies, tourism hiring, outdoor labour</td>
+                <td>X-13 or STL depending on frequency and history length</td>
+                <td>Tourism hiring season, summer slowdown, fiscal-year recruitment</td>
+                <td>Raw rate, SA rate, irregular movement, analyst interpretation</td>
+                <td><span class="badge amber">Hiring-cycle alerts</span></td>
+              </tr>
+              <tr>
+                <td><strong>Industrial and construction</strong></td>
+                <td>Industrial production, construction output, permits, cement demand</td>
+                <td>STL/TBATS with heat variables; X-13 for long monthly series</td>
+                <td>Extreme summer heat, working days, project delivery cycles</td>
+                <td>Raw fall/rise, expected seasonal range, SA change, confidence level</td>
+                <td><span class="badge amber">Summer anomaly alerts</span></td>
+              </tr>
+              <tr>
+                <td><strong>Retail and consumer activity</strong></td>
+                <td>Retail sales, card transactions, e-commerce, restaurants, logistics</td>
+                <td>X-13 for monthly; TBATS for daily/weekly high-frequency proxies</td>
+                <td>Pre-Ramadan shopping, Eid spending, White Friday, year-end sales</td>
+                <td>Raw vs SA sales, seasonal shift score, AI explanation, event overlay</td>
+                <td><span class="badge cyan">Evolving seasonality</span></td>
+              </tr>
+              <tr>
+                <td><strong>Trade and balance of payments</strong></td>
+                <td>Imports, exports, re-exports, consumer goods, capital goods</td>
+                <td>X-13 with trading-day and holiday regressors</td>
+                <td>Ramadan import surge, year-end orders, shipping days, holidays</td>
+                <td>Raw trade balance, SA trade balance, calendar effect, outlier note</td>
+                <td><span class="badge green">Calendar shock alerts</span></td>
+              </tr>
+              <tr>
+                <td><strong>Tourism and hospitality</strong></td>
+                <td>Tourist arrivals, hotel occupancy, room nights, hospitality jobs</td>
+                <td>X-13 with tourism-season and event regressors</td>
+                <td>October-March peak, F1, exhibitions, Eid travel, summer low season</td>
+                <td>Raw occupancy, SA occupancy, tourism-season effect, event impact note</td>
+                <td><span class="badge green">Peak-season alerts</span></td>
+              </tr>
+              <tr>
+                <td><strong>Experimental high-frequency data</strong></td>
+                <td>Daily transactions, scanner prices, mobility, electricity demand</td>
+                <td>TBATS and STL for multiple seasonal cycles</td>
+                <td>Weekday/weekend, salary cycle, Ramadan weeks, heat days, events</td>
+                <td>Daily/weekly SA proxy, intra-month annotation, early-warning signal</td>
+                <td><span class="badge purple">Early warning</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="section" id="command">
         <div class="section-header">
           <div>
-            <h3>1. Real-time command center</h3>
+            <h3>3. Real-time command center</h3>
             <p>Executive view of seasonal adjustment coverage, model health, and alerts.</p>
           </div>
           <button class="button small" onclick="refreshMock()">Refresh mock feed</button>
@@ -826,7 +1039,7 @@
       <section class="section">
         <div class="section-header">
           <div>
-            <h3>2. What the tool does end to end</h3>
+            <h3>4. What the tool does end to end</h3>
             <p>From raw indicator to trusted explanation and action.</p>
           </div>
         </div>
@@ -867,7 +1080,7 @@
       <section class="section" id="analyzer">
         <div class="section-header">
           <div>
-            <h3>3. Indicator analyzer</h3>
+            <h3>5. Indicator analyzer</h3>
             <p>Select an indicator to see raw vs adjusted values, seasonal drivers, and AI interpretation.</p>
           </div>
         </div>
@@ -1049,7 +1262,7 @@
       <section class="section" id="calendar">
         <div class="section-header">
           <div>
-            <h3>4. Abu Dhabi calendar intelligence</h3>
+            <h3>6. Abu Dhabi calendar intelligence</h3>
             <p>The core advanced feature: Gregorian + Hijri + weather + tourism + retail-event context.</p>
           </div>
         </div>
@@ -1088,7 +1301,7 @@
       <section class="section" id="alerts">
         <div class="section-header">
           <div>
-            <h3>5. Real-time alert center</h3>
+            <h3>7. Real-time alert center</h3>
             <p>Alerts are generated when new data arrives, model diagnostics fail, or seasonal patterns evolve.</p>
           </div>
           <button class="button small" onclick="simulateAlert()">Add mock alert</button>
@@ -1156,7 +1369,7 @@
       <section class="section" id="assistant">
         <div class="section-header">
           <div>
-            <h3>6. AI research assistant</h3>
+            <h3>8. AI research assistant</h3>
             <p>Economists can ask plain-language questions and receive a structured analytical answer.</p>
           </div>
         </div>
@@ -1193,7 +1406,7 @@
       <section class="section" id="models">
         <div class="section-header">
           <div>
-            <h3>7. Models, diagnostics, and methodology</h3>
+            <h3>9. Models, diagnostics, and methodology</h3>
             <p>This section gives Analytics Research full transparency and control.</p>
           </div>
         </div>
@@ -1309,7 +1522,7 @@
       <section class="section" id="data">
         <div class="section-header">
           <div>
-            <h3>8. Data collections and database design</h3>
+            <h3>10. Data collections and database design</h3>
             <p>Mock data inventory for later real-data integration.</p>
           </div>
         </div>
@@ -1417,7 +1630,7 @@
       <section class="section" id="architecture">
         <div class="section-header">
           <div>
-            <h3>9. Architecture blueprint</h3>
+            <h3>11. Architecture blueprint</h3>
             <p>How the advanced tool fits into Bayaan and future real-time pipelines.</p>
           </div>
         </div>
@@ -1448,7 +1661,7 @@
       <section class="section" id="governance">
         <div class="section-header">
           <div>
-            <h3>10. Governance, audit, and advanced controls</h3>
+            <h3>12. Governance, audit, and advanced controls</h3>
             <p>Trust features needed for a powerful SCAD research-grade tool.</p>
           </div>
         </div>
@@ -1484,7 +1697,7 @@
       <section class="section">
         <div class="section-header">
           <div>
-            <h3>11. Example report output</h3>
+            <h3>13. Example report output</h3>
             <p>What a generated economist-ready summary could look like.</p>
           </div>
         </div>
