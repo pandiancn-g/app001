@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cost of Living Impact Analyzer - Mock UI</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --line: #dbe3ef;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --green: #16a34a;
+      --amber: #d97706;
+      --red: #dc2626;
+      --purple: #7c3aed;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 28px 22px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 34px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: white;
+    }
+
+    .brand h1 {
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .brand p {
+      color: #94a3b8;
+      font-size: 12px;
+      margin: 2px 0 0;
+    }
+
+    .nav-title {
+      color: #94a3b8;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 26px 0 10px;
+    }
+
+    .nav-item {
+      display: block;
+      color: #cbd5e1;
+      padding: 11px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+      background: rgba(148, 163, 184, 0.15);
+      color: white;
+    }
+
+    .content {
+      padding: 28px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1d4ed8, #0f766e);
+      color: white;
+      padding: 30px;
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero h2 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      color: #dbeafe;
+      max-width: 780px;
+    }
+
+    .prompt-box {
+      background: rgba(15, 23, 42, 0.26);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .prompt-box label {
+      display: block;
+      color: #bfdbfe;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .prompt-box .question {
+      background: white;
+      color: var(--ink);
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .button {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .section h3 {
+      font-size: 22px;
+      margin: 0;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      margin: 4px 0 0;
+    }
+
+    .filters,
+    .cards,
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .filters {
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
+      background: var(--panel);
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .field label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 11px;
+      background: white;
+      color: var(--ink);
+    }
+
+    .cards {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 18px;
+    }
+
+    .card .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .card .value {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 8px 0 2px;
+    }
+
+    .card .change {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .positive {
+      color: var(--green);
+    }
+
+    .warning {
+      color: var(--amber);
+    }
+
+    .danger {
+      color: var(--red);
+    }
+
+    .grid-2 {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .panel h4 {
+      margin: 0 0 12px;
+      font-size: 17px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .objective-statement {
+      background: linear-gradient(135deg, #eff6ff, #ecfeff);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .objective-statement strong {
+      color: #1d4ed8;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .detail-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .detail-card .number {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .detail-card h4 {
+      margin: 0 0 8px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #334155;
+      padding: 6px 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .flow-step {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      position: relative;
+    }
+
+    .flow-step span {
+      display: inline-block;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .flow-step h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .output-card {
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      background: #f8fafc;
+      padding: 14px;
+    }
+
+    .output-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 56px;
+      gap: 12px;
+      align-items: center;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .bar-track {
+      height: 12px;
+      background: #eef2f7;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+
+    .bar.food {
+      background: var(--amber);
+    }
+
+    .bar.housing {
+      background: var(--red);
+    }
+
+    .bar.transport {
+      background: var(--green);
+    }
+
+    .bar.education {
+      background: var(--purple);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge.green {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .badge.amber {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .badge.red {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .scenario {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .result-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .insight-list {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .insight-list li {
+      margin-bottom: 8px;
+    }
+
+    .use-case-card {
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .use-case-card h4 {
+      margin: 10px 0 6px;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 28px 0 8px;
+    }
+
+    @media (max-width: 1100px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+
+      .hero,
+      .grid-2,
+      .cards,
+      .grid-3,
+      .detail-grid,
+      .workflow,
+      .output-grid,
+      .filters,
+      .scenario {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">B</div>
+        <div>
+          <h1>Bayaan</h1>
+          <p>Analyse phase mock UI</p>
+        </div>
+      </div>
+
+      <div class="nav-title">Cost of living analyzer</div>
+      <a class="nav-item active" href="#overview">Overview Dashboard</a>
+      <a class="nav-item" href="#objective">Objective Details</a>
+      <a class="nav-item" href="#workflow">How It Works</a>
+      <a class="nav-item" href="#segments">Population Segments</a>
+      <a class="nav-item" href="#datasets">Datasets and Fields</a>
+      <a class="nav-item" href="#simulation">Policy Simulation</a>
+      <a class="nav-item" href="#insights">AI Insights</a>
+
+      <div class="nav-title">Main question</div>
+      <p class="muted">How are price changes affecting different people in Abu Dhabi?</p>
+    </aside>
+
+    <main class="content">
+      <section class="hero" id="overview">
+        <div>
+          <span class="eyebrow">Mock UI for understanding the use case</span>
+          <h2>Cost of Living Impact Analyzer</h2>
+          <p>
+            An AI-powered Bayaan module for SCAD Research & Innovation economists
+            to integrate prices, wages, housing, food, fuel, and household survey
+            data into detailed cost-of-living analysis for Abu Dhabi.
+          </p>
+          <button class="button">Generate analysis</button>
+          <button class="button secondary">Export brief</button>
+        </div>
+        <div class="prompt-box">
+          <label>Objective in simple words</label>
+          <div class="question">
+            Help economists measure, compare, and simulate how rising living
+            costs affect different population groups in Abu Dhabi.
+          </div>
+          <p class="muted">
+            Instead of only showing headline CPI, the tool explains the real
+            pressure felt by each segment.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="objective">
+        <div class="section-header">
+          <div>
+            <h3>1. Objective details</h3>
+            <p>What the objective means inside the application.</p>
+          </div>
+        </div>
+        <div class="objective-statement">
+          <strong>Goal:</strong>
+          Equip R&I economics specialists with an AI analytical tool inside
+          Bayaan that combines CPI, wage, housing, food, fuel, and household
+          survey data to produce distributional cost-of-living analysis by
+          income group, nationality, and family composition, with policy
+          simulation for rent caps, subsidies, and price changes.
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="detail-grid">
+          <div class="detail-card">
+            <div class="number">A</div>
+            <h4>Integrate economic datasets</h4>
+            <p class="muted">
+              The tool connects multiple sources that economists currently
+              combine manually.
+            </p>
+            <div class="tag-list">
+              <span class="tag">CPI categories</span>
+              <span class="tag">Wages</span>
+              <span class="tag">Housing rents</span>
+              <span class="tag">Food prices</span>
+              <span class="tag">Fuel prices</span>
+              <span class="tag">Household survey</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="number">B</div>
+            <h4>Analyze specific groups</h4>
+            <p class="muted">
+              Economists choose the population segment and the AI calculates
+              that group's effective inflation and purchasing-power change.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Income group</span>
+              <span class="tag">Nationality</span>
+              <span class="tag">Family composition</span>
+              <span class="tag">Household size</span>
+              <span class="tag">Housing tenure</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="number">C</div>
+            <h4>Simulate policy options</h4>
+            <p class="muted">
+              Users can test hypothetical policy changes before decisions are
+              made and see which groups benefit or face extra pressure.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Rent caps</span>
+              <span class="tag">Subsidy changes</span>
+              <span class="tag">Fuel adjustment</span>
+              <span class="tag">Food shocks</span>
+              <span class="tag">School fees</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="section-header">
+          <div>
+            <h3>2. How the AI workflow works</h3>
+            <p>From raw data to an economist-ready answer.</p>
+          </div>
+        </div>
+        <div class="workflow">
+          <div class="flow-step">
+            <span>Step 1</span>
+            <h4>Ingest data</h4>
+            <p class="muted">Pull CPI, wages, rents, prices, tariffs, and HIES expenditure shares.</p>
+          </div>
+          <div class="flow-step">
+            <span>Step 2</span>
+            <h4>Build segment</h4>
+            <p class="muted">Filter by income, nationality, household type, and geography.</p>
+          </div>
+          <div class="flow-step">
+            <span>Step 3</span>
+            <h4>Re-weight basket</h4>
+            <p class="muted">Use the segment's spending pattern instead of the average CPI basket.</p>
+          </div>
+          <div class="flow-step">
+            <span>Step 4</span>
+            <h4>Calculate impact</h4>
+            <p class="muted">Compare effective inflation, wages, real income, and category pressure.</p>
+          </div>
+          <div class="flow-step">
+            <span>Step 5</span>
+            <h4>Explain and export</h4>
+            <p class="muted">Generate charts, insight text, methodology notes, and files.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <h3>3. What economists get from the tool</h3>
+            <p>These are the main decision-support outputs from the objective.</p>
+          </div>
+        </div>
+        <div class="output-grid">
+          <div class="output-card">
+            <strong>Segment inflation</strong>
+            <span class="muted">Example: low-income renter households experience 4.4% effective inflation.</span>
+          </div>
+          <div class="output-card">
+            <strong>Real income change</strong>
+            <span class="muted">Example: wage growth is 2.4%, but effective inflation is 3.8%.</span>
+          </div>
+          <div class="output-card">
+            <strong>Policy impact</strong>
+            <span class="muted">Example: a rent cap improves disposable income by AED 420 per month.</span>
+          </div>
+          <div class="output-card">
+            <strong>Report-ready insight</strong>
+            <span class="muted">Example: housing and food explain most pressure for the selected segment.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <h3>4. Choose the population group</h3>
+            <p>Select filters to compare cost-of-living impact by segment.</p>
+          </div>
+        </div>
+        <div class="filters">
+          <div class="field">
+            <label>Income group</label>
+            <select>
+              <option>Middle income</option>
+              <option>Low income</option>
+              <option>High income</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Nationality</label>
+            <select>
+              <option>Emirati</option>
+              <option>Expatriate</option>
+              <option>All nationalities</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Household type</label>
+            <select>
+              <option>Family with children</option>
+              <option>Single worker</option>
+              <option>Retiree household</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Housing tenure</label>
+            <select>
+              <option>Private rental</option>
+              <option>Owned home</option>
+              <option>Subsidized housing</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Period</label>
+            <select>
+              <option>Last 24 months</option>
+              <option>Last 12 months</option>
+              <option>Current year</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="cards">
+          <div class="card">
+            <div class="label">Headline CPI inflation</div>
+            <div class="value">2.0%</div>
+            <div class="change">Official overall inflation</div>
+          </div>
+          <div class="card">
+            <div class="label">Effective group inflation</div>
+            <div class="value warning">3.8%</div>
+            <div class="change">Higher because housing and food weights are larger</div>
+          </div>
+          <div class="card">
+            <div class="label">Wage growth</div>
+            <div class="value positive">2.4%</div>
+            <div class="change">Median wage growth for selected group</div>
+          </div>
+          <div class="card">
+            <div class="label">Real income change</div>
+            <div class="value danger">-1.4%</div>
+            <div class="change">Wage growth minus effective inflation</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section grid-2">
+        <div class="panel">
+          <h4>Cost pressure by spending category</h4>
+          <p class="muted">
+            This shows which categories are creating the largest pressure for
+            the selected household group.
+          </p>
+          <div class="bar-row">
+            <span>Housing rent</span>
+            <div class="bar-track"><div class="bar housing" style="width: 86%;"></div></div>
+            <strong>+6.5%</strong>
+          </div>
+          <div class="bar-row">
+            <span>Food</span>
+            <div class="bar-track"><div class="bar food" style="width: 68%;"></div></div>
+            <strong>+4.7%</strong>
+          </div>
+          <div class="bar-row">
+            <span>Education</span>
+            <div class="bar-track"><div class="bar education" style="width: 48%;"></div></div>
+            <strong>+3.1%</strong>
+          </div>
+          <div class="bar-row">
+            <span>Transport</span>
+            <div class="bar-track"><div class="bar transport" style="width: 38%;"></div></div>
+            <strong>+2.2%</strong>
+          </div>
+          <div class="bar-row">
+            <span>Utilities</span>
+            <div class="bar-track"><div class="bar" style="width: 28%;"></div></div>
+            <strong>+1.6%</strong>
+          </div>
+        </div>
+
+        <div class="panel" id="segments">
+          <h4>Segment comparison</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Group</th>
+                <th>Effective inflation</th>
+                <th>Risk</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Low-income expatriate workers</td>
+                <td>4.4%</td>
+                <td><span class="badge red">High</span></td>
+              </tr>
+              <tr>
+                <td>Middle-income Emirati families</td>
+                <td>3.8%</td>
+                <td><span class="badge amber">Medium</span></td>
+              </tr>
+              <tr>
+                <td>High-income households</td>
+                <td>2.3%</td>
+                <td><span class="badge green">Low</span></td>
+              </tr>
+              <tr>
+                <td>Retiree households</td>
+                <td>3.0%</td>
+                <td><span class="badge amber">Medium</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="datasets">
+        <div class="section-header">
+          <div>
+            <h3>5. Datasets and fields needed</h3>
+            <p>The analyzer needs these datasets to create reliable results.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Dataset</th>
+                <th>Why needed</th>
+                <th>Key fields</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>CPI by COICOP category</strong></td>
+                <td>Measures price change by category.</td>
+                <td>Period, COICOP code, category name, CPI value, inflation rate, geography, CPI weight, base year</td>
+              </tr>
+              <tr>
+                <td><strong>Household expenditure survey</strong></td>
+                <td>Shows how each household group spends money.</td>
+                <td>Household ID, income group, nationality, household size, children, rent, food, transport, utilities, education, survey weight</td>
+              </tr>
+              <tr>
+                <td><strong>Wage and income statistics</strong></td>
+                <td>Compares income growth against cost growth.</td>
+                <td>Period, wage, household income, sector, occupation, age group, gender, nationality, income decile, region</td>
+              </tr>
+              <tr>
+                <td><strong>Housing rent data</strong></td>
+                <td>Calculates rent burden and rent cap impact.</td>
+                <td>Period, location, property type, bedrooms, rent value, rent index, tenancy type</td>
+              </tr>
+              <tr>
+                <td><strong>Food and fuel prices</strong></td>
+                <td>Measures pressure from essential goods and transport costs.</td>
+                <td>Product, unit, price, fuel type, fuel price per liter, location, period</td>
+              </tr>
+              <tr>
+                <td><strong>Utility and education fees</strong></td>
+                <td>Supports tariff and school fee simulations.</td>
+                <td>Utility type, tariff band, customer type, subsidy amount, school type, grade level, annual tuition</td>
+              </tr>
+              <tr>
+                <td><strong>Demographic register</strong></td>
+                <td>Defines population segments.</td>
+                <td>Person ID, household ID, age, gender, nationality, household composition, region, student indicator</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="simulation">
+        <div class="section-header">
+          <div>
+            <h3>6. Policy simulation module</h3>
+            <p>Users test hypothetical policy changes and see who is affected.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="panel">
+            <h4>Scenario inputs</h4>
+            <div class="scenario">
+              <div class="field">
+                <label>Scenario type</label>
+                <select id="scenarioType">
+                  <option>Rent cap</option>
+                  <option>Fuel price change</option>
+                  <option>Food subsidy</option>
+                  <option>Utility tariff change</option>
+                  <option>Education fee change</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Policy change</label>
+                <input id="policyChange" type="text" value="Limit annual rent increase to 3%">
+              </div>
+              <div class="field">
+                <label>Affected group</label>
+                <select>
+                  <option>Middle-income renter families</option>
+                  <option>Low-income households</option>
+                  <option>All private renters</option>
+                  <option>Families with school-age children</option>
+                </select>
+              </div>
+            </div>
+            <button class="button" onclick="runScenario()">Run simulation</button>
+          </div>
+
+          <div class="panel">
+            <h4>Mock simulation result</h4>
+            <div class="result-box" id="simulationResult">
+              <strong>Rent cap scenario:</strong>
+              Effective inflation for middle-income renter families decreases
+              from <strong>3.8%</strong> to <strong>3.1%</strong>. Estimated
+              monthly disposable income improves by <strong>AED 420</strong>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="insights">
+        <div class="section-header">
+          <div>
+            <h3>7. AI-generated explanation</h3>
+            <p>This is the type of plain-language output the AI can produce.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="use-case-card">
+            <span class="badge">Use case</span>
+            <h4>Distributional inflation</h4>
+            <p class="muted">
+              Calculates inflation using each group's actual spending basket,
+              not only the official CPI basket.
+            </p>
+          </div>
+          <div class="use-case-card">
+            <span class="badge">Use case</span>
+            <h4>Vulnerable group detection</h4>
+            <p class="muted">
+              Finds groups where rent, food, transport, or school fees consume
+              a high share of income.
+            </p>
+          </div>
+          <div class="use-case-card">
+            <span class="badge">Use case</span>
+            <h4>Policy impact simulation</h4>
+            <p class="muted">
+              Estimates how rent caps, subsidies, fuel prices, or tariffs change
+              household disposable income.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel section">
+          <h4>Sample insight summary</h4>
+          <ul class="insight-list">
+            <li>
+              Headline CPI is 2.0%, but the selected household group experiences
+              3.8% effective inflation because housing and food have higher
+              weights in their budget.
+            </li>
+            <li>
+              Wage growth of 2.4% does not fully offset price increases, creating
+              a real income decline of 1.4%.
+            </li>
+            <li>
+              The strongest pressure comes from rent, followed by food and
+              education costs.
+            </li>
+            <li>
+              A 3% rent cap could reduce effective inflation by 0.7 percentage
+              points for affected renter families.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        Mock data only. This page is for explaining the product concept and data needs.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    function runScenario() {
+      var scenarioType = document.getElementById("scenarioType").value;
+      var policyChange = document.getElementById("policyChange").value;
+      var result = document.getElementById("simulationResult");
+
+      result.innerHTML =
+        "<strong>" + scenarioType + " scenario:</strong> " +
+        "The selected policy change, <strong>" + policyChange + "</strong>, " +
+        "is estimated to reduce effective inflation for the target group from " +
+        "<strong>3.8%</strong> to <strong>3.1%</strong> and improve monthly " +
+        "disposable income by <strong>AED 420</strong>. This is mock output for UI understanding.";
+    }
+  </script>
+</body>
+</html>
